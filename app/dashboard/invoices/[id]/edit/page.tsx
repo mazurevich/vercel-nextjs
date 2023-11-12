@@ -1,7 +1,7 @@
 import Form from "@/app/ui/invoices/edit-form";
 import Breadcrumbs from "@/app/ui/invoices/breadcrumbs";
 import { fetchCustomers, fetchInvoiceById } from "@/app/lib/data";
-import { updateInvoice } from "@/app/lib/actions";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -11,11 +11,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   ]);
 
   if (!invoice) {
-    return (
-      <div className="flex justify-center w-full h-28 flex-col ">
-        <h1 className="text-2xl text-center">Invoice not found</h1>
-      </div>
-    );
+    notFound();
   }
 
   return (
